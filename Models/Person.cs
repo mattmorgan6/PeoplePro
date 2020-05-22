@@ -16,6 +16,6 @@ namespace PeoplePro.Models
 		public Department Department { get; set; }
 
 		//Relationship to Role class
-		//public List<Role> Roles { get; set; }
+		public List<PersonRole> PersonRoles { get; set; }
 	}
 }

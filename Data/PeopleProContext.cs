@@ -17,12 +17,14 @@ namespace PeoplePro.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Room>().ToTable("Rooms");
             modelBuilder.Entity<Department>().ToTable("Departments");
             modelBuilder.Entity<Person>().ToTable("Persons");
+            modelBuilder.Entity<Role>().ToTable("Roles");
 
             //Add the one room to many posts relationship to the database
             modelBuilder.Entity<Department>()
@@ -33,6 +35,20 @@ namespace PeoplePro.Data
             modelBuilder.Entity<Person>()
                 .HasOne(p => p.Department)
                 .WithMany(d => d.People);
+
+            //Add the many people to many roles relationship to the database
+            modelBuilder.Entity<PersonRole>()
+                .HasKey(t => new { t.PersonId, t.RoleId });
+
+            modelBuilder.Entity<PersonRole>()
+                .HasOne(pr => pr.Person)
+                .WithMany(p => p.PersonRoles)
+                .HasForeignKey(pr => pr.PersonId);
+
+            modelBuilder.Entity<PersonRole>()
+                .HasOne(pr => pr.Role)
+                .WithMany(r => r.PersonRoles)
+                .HasForeignKey(pr => pr.RoleId);
         }
     }
 }

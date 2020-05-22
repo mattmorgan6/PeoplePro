@@ -12,10 +12,10 @@ namespace PeoplePro.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any students.
-            if (context.Rooms.Any())
+            //Look for any rooms.
+            if (context.Roles.Any())
             {
-                return;   // DB has been seeded
+                return;   // DB has already been seeded
             }
 
             var rooms = new Room[]
@@ -25,9 +25,9 @@ namespace PeoplePro.Data
                 new Room { Name="Weatherford" },
                 new Room { Name="Austin Hall" }
             };
-
             context.Rooms.AddRange(rooms);
             context.SaveChanges();
+
 
             var departments = new Department[]
             {
@@ -36,7 +36,6 @@ namespace PeoplePro.Data
                 new Department { Name="Philosophy", RoomId=2 },
                 new Department { Name="Math", RoomId=1 }
             };
-
             context.Departments.AddRange(departments);
             context.SaveChanges();
 
@@ -47,8 +46,17 @@ namespace PeoplePro.Data
                 new Person { Name="Tiger Woods", DepartmentId=4 },
                 new Person { Name="Bob Marley", DepartmentId=4 }
             };
-
             context.People.AddRange(people);
+            context.SaveChanges();
+
+            var roles = new Role[]
+            {
+                new Role { Name="Professor", },
+                new Role { Name="Instructor" },
+                new Role { Name="President", },
+                new Role { Name="Student" }
+            };
+            context.Roles.AddRange(roles);
             context.SaveChanges();
 
 
