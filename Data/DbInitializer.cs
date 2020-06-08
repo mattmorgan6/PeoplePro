@@ -21,10 +21,10 @@ namespace PeoplePro.Data
 
             var rooms = new Room[]
             {
-                new Room { Name="LINC" },
-                new Room { Name="MU" },
-                new Room { Name="Weatherford" },
-                new Room { Name="Austin Hall" }
+                new Room { RoomName="LINC" },
+                new Room { RoomName="MU" },
+                new Room { RoomName="Weatherford" },
+                new Room { RoomName="Austin Hall" }
             };
             context.Rooms.AddRange(rooms);
             context.SaveChanges();
